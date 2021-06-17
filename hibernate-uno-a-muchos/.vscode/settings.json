@@ -1,0 +1,16 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "e:\\Java\\OO2\\lib\\antlr-2.7.7.jar",
+        "e:\\Java\\OO2\\lib\\dom4j-1.6.1.jar",
+        "e:\\Java\\OO2\\lib\\geronimo-jta_1.1_spec-1.1.1.jar",
+        "e:\\Java\\OO2\\lib\\hibernate-commons-annotations-5.0.1.Final.jar",
+        "e:\\Java\\OO2\\lib\\hibernate-core-5.0.12.Final.jar",
+        "e:\\Java\\OO2\\lib\\hibernate-java8-5.0.12.Final.jar",
+        "e:\\Java\\OO2\\lib\\hibernate-jpa-2.1-api-1.0.0.Final.jar",
+        "e:\\Java\\OO2\\lib\\jandex-2.0.0.Final.jar",
+        "e:\\Java\\OO2\\lib\\javassist-3.18.1-GA.jar",
+        "e:\\Java\\OO2\\lib\\jboss-logging-3.3.0.Final.jar",
+        "e:\\Java\\OO2\\lib\\mysql-connector-java-5.1.47-bin.jar"
+    ]
+}
