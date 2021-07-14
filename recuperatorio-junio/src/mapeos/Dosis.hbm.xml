@@ -11,8 +11,7 @@
         <property column="fecha" name="fecha" type="LocalDate" />
         <property column="hora" name="hora" type="LocalTime" />
 
-        <many-to-one name="persona" lazy="false" class="datos.Persona" column="idPersona" not-null="true" />
-        <many-to-one name="vacuna" lazy="false" class="datos.Vacuna" column="idVacuna" not-null="true" />
-
+        <many-to-one name="persona" lazy="proxy" class="datos.Persona" column="idPersona" not-null="true" />
+        <many-to-one name="vacuna" lazy="proxy" class="datos.Vacuna" column="idVacuna" not-null="true" />
     </class>
 </hibernate-mapping>
