@@ -5,20 +5,21 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import datos.Permiso;
+import datos.Almacen;
+import datos.Producto;
 
-public class PermisoDao {
+public class AlmacenDao {
     private static Session session;
-	private Transaction tx;
-    private static PermisoDao instancia;
+	private Transaction tx;	
+	private static AlmacenDao instancia;
 
-    public static PermisoDao getInstancia() {
+    public static AlmacenDao getInstancia() {
         if (instancia == null) {
-            instancia = new PermisoDao();
+            instancia = new AlmacenDao();
         }
         return instancia;
     }
-	
+
 	protected void iniciaOperacion() throws HibernateException {
 		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
@@ -28,17 +29,19 @@ public class PermisoDao {
 		tx.rollback();
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}
-   
-    public Permiso traer(int id) throws HibernateException {
-        Permiso objeto = null;
+
+    public Almacen traerAlmacen(Producto producto) {
+        Almacen objeto = null;
         try {
             iniciaOperacion();
-            objeto = (Permiso) session.get(Permiso.class, id);   
-            Hibernate.initialize(objeto.getPersona());
-            Hibernate.initialize(objeto.getRodado());             
+			objeto = (Almacen) session.createQuery("from Stock s inner join fetch s.producto p where p.codigo=" + producto.getCodigo()).uniqueResult();
+            Hibernate.initialize(objeto.getLotes());
         } finally {
             session.close();
         }
         return objeto;
     }
+
+	
+
 }

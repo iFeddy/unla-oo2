@@ -9,10 +9,6 @@
     </id>
     <property column="nombre" name="nombre" type="string" />
     <property column="apellido" name="apellido" type="string" />
-    <property column="dni" name="dni" type="int" />
-    <set name="permisos" table="permiso" order-by="idPermiso asc" inverse="true" lazy="true" fetch="select">
-      <key column="idPersona" not-null="true" />
-      <one-to-many class="datos.Permiso" />
-    </set>
+    <property column="dni" name="dni" type="int" />   
   </class>
 </hibernate-mapping>

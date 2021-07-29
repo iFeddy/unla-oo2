@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping
+    PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- name="carpeta.Clase" table="db" -->
+    <class name="modelo.Cliente" table="cliente">
+        <!-- Column: id -->
+        <id column="idDb" name="idClase">
+            <generator class="identity" />
+        </id>
+        <!-- Column: String -->
+        <property column="dbCol" name="claseProp" type="string" />
+        <!-- Column: INT -->
+        <property column="dbCol" name="claseProp" type="int" />   
+        <!-- Column: DOUBLE -->
+        <property column="dbCol" name="claseProp" type="double" />
+        <!-- Column: DATE -->
+        <property column="dbCol" name="claseProp" type="date" />
+        <!-- Column: TIME -->
+        <property column="dbCol" name="claseProp" type="time" />
+        <!-- Column: TIMESTAMP -->
+        <property column="dbCol" name="claseProp" type="timestamp" />
+        <!-- Column: BOOLEAN -->
+        <property column="dbCol" name="claseProp" type="boolean" />
+        
+        <!-- Las relaciones se ponen solamente en la clase que los usa 1er nivel -->
+        <!-- Proxy = Lazy en True -->
+        <!-- muchos a 1 -->
+        <many-to-one column="idPersona" name="persona" lazy="proxy" fetch="join" class="datos.Persona" not-null="true" />
+        
+        <!-- 1 a muchos -->
+        <!-- esta es la relacion desde el otro end se pone si se necesita acceder desde aca -->
+        <set name="claseProp" table="dbTabla" lazy="true" fetch="join">
+            <key column="dbColID" not-null="true" />
+            <one-to-many class="datos.Prestamo" />
+        </set>
+        
+        <!-- muchos a muchos tabla intermedia -->
+        <set table="permisoxlugar" name="desdeHasta" outer-join="true">
+            <key column="idPermiso" />
+            <many-to-many column="idLugar" class="datos.Lugar" />
+        </set>
+
+        <!-- Clases abstractas -->
+        <joined-subclass name="modelo.PersonaJuridica" table="personajuridica">
+            <key column="idPersonaJuridica" />
+            <property column="razonSocial" name="razonSocial" type="string" />
+            <property column="cuit" name="cuit" type="string" />
+        </joined-subclass>
+
+        <joined-subclass name="modelo.PersonaFisica" table="personafisica">
+            <key column="idPersonaFisica" />
+            <property column="apellido" name="apellido" type="string" />
+            <property column="nombre" name="nombre" type="string" />
+            <property column="dni" name="dni" type="int" />
+        </joined-subclass>
+
+                
+        <joined-subclass name="datos.Ubicacion" table="ubicacion">
+            <key column="idUbicacion" />
+            <property column="longitud" name="longitud" type="double" />
+            <property column="latitud" name="latitud" type="double" />
+        </joined-subclass>
+
+        <joined-subclass name="datos.Localidad" table="localidad">
+            <key column="idLocalidad" />
+            <property column="codPostal" name="codPostal" type="string" />
+            <property column="cumplirCuarentena" name="cumplirCuarentena" type="boolean" />
+        </joined-subclass>
+
+    </class>
+</hibernate-mapping>
